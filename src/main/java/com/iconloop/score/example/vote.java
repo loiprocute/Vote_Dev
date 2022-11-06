@@ -31,10 +31,6 @@ import score.annotation.Optional;
 import score.annotation.Payable;
 
 
-
-
-
-
 public class vote {
     
     
