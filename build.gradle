@@ -24,6 +24,9 @@ dependencies {
 optimizedJar {
     mainClassName = 'com.iconloop.score.example.vote'
     //archivesBaseName = 'vote'
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
 
 deployJar {
@@ -39,26 +42,12 @@ deployJar {
     }
     keystore = rootProject.hasProperty('keystoreName') ? "$keystoreName" : ''
     password = rootProject.hasProperty('keystorePass') ? "$keystorePass" : ''
-    parameters {
-        arg('name', 'Alice')
-    }
+    // parameters {
+    //     arg('name', 'Alice')
+    // }
 }
 
 test {
     useJUnitPlatform()
 }
-task integrationTest(type: Test, dependsOn: optimizedJar) {
-    useJUnitPlatform()
-    description = 'Runs integration tests.'
-    group = 'verification'
 
-    testClassesDirs = sourceSets.intTest.output.classesDirs
-    classpath = sourceSets.intTest.runtimeClasspath
-    testLogging.showStandardStreams = true
-
-    // use the common config files
-    systemProperty('env.props', new File(project(':testinteg').projectDir, 'conf/env.props'))
-
-    def prefix = 'score.path.'
-    systemProperty(prefix + project.name, optimizedJar.outputJarName)
-}

@@ -1,4 +1,5 @@
 package com.iconloop.score.example;
+import score.*;
 
 public class Candidate {
     private String name;
@@ -6,12 +7,32 @@ public class Candidate {
     private String qualification;
     private String imageurl;
 
-    public Candidate(String name,int votes,String qualification,String imageurl){
+    public Candidate(String name,String qualification,String imageurl){
         this.name=name;
-        this.votes=votes;
         this.qualification=qualification;
         this.imageurl=imageurl;
+        this.votes=0;
     }
+
+    public static void writeObject(ObjectWriter w, Candidate c) {
+        w.beginList(1);
+        w.write(
+                c.name,
+                c.qualification,
+                c.imageurl,
+                c.votes
+        );
+        w.end();
+    }
+
+    public static Candidate readObject(ObjectReader r) {
+        r.beginList();
+        Candidate c = new Candidate(r.readString(),r.readString(),r.readString());
+        c.setVotes(r.readInt());
+        r.end();
+        return c;
+    }
+
     public String getImageurl() {
         return this.imageurl;
     }
@@ -21,8 +42,8 @@ public class Candidate {
     public String getQual(){
         return this.qualification;
     }
-    public void addVotes(){
-        this.votes ++;
+    public void setVotes(int votes){
+        this.votes =votes;
     }
     public int getNumVotes(){
         return this.votes;

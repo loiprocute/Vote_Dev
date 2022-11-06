@@ -57,27 +57,49 @@ class voteTest extends TestBase {
     
     @Test
     public void checkCaller() {
-
+        voteScore.invoke(owner,"registration",owner.getAddress());
         voteScore.invoke(owner,"createPool","thi hoa hau","2","3");
         voteScore.invoke(owner,"createPool","thi hoa hau1","22","33");
+        // voteScore.invoke(bob,"registration",bob.getAddress());
+        // voteScore.invoke(bob,"createPool","thi hoa hau2","2a2","3a3");
+        // voteScore.invoke(bob,"createPool","thi hoa hau3","aa2","3a3");
+        // voteScore.invoke(owner,"getPoolsByAddress",bob.getAddress());
+        // voteScore.invoke(owner,"getPoolsByAddress",owner.getAddress());
+        // voteScore.invoke(owner,"createPool","thi hoa hau2","2q2","3a3");
+        voteScore.invoke(owner,"addCandidate",1,"nghuuloi1","deptrai1","111");
+        voteScore.invoke(owner,"addCandidate",1,"nghuulam1","deptraithualo1i","122");
 
-        voteScore.invoke(owner,"createPool","thi hoa hau2","2q2","3a3");
         voteScore.invoke(owner,"addCandidate",2,"nghuuloi","deptrai","111");
         voteScore.invoke(owner,"addCandidate",2,"nghuulam","deptraithualoi","122");
+        
+        //voteScore.invoke(owner,"toJsonFormat_Candidate",1);
+        voteScore.invoke(nana,"registration",nana.getAddress());
+        voteScore.invoke(bob,"registration",bob.getAddress());
+        voteScore.invoke(alice,"registration",alice.getAddress());
 
-        voteScore.invoke(bob,"createPool","thi hoa hau3","aaa","3a3a");
-        voteScore.invoke(bob,"addCandidate",1,"nghuulang","deptrai","111a");
-        voteScore.invoke(bob,"addCandidate",1,"nghuuanh","dxau","122b");
 
-        voteScore.invoke(nana,"Vote",bob.getAddress(),2,1);
-        voteScore.invoke(alice,"Vote",bob.getAddress(),2,1);
-        voteScore.invoke(jax,"Vote",bob.getAddress(),2,1);
-        voteScore.invoke(jelly,"Vote",bob.getAddress(),1,1);
+        voteScore.invoke(nana,"Vote",owner.getAddress(),1,1);
+        voteScore.invoke(bob,"Vote",owner.getAddress(),1,1);
+        voteScore.invoke(bob,"Vote",owner.getAddress(),2,1);
 
-        voteScore.invoke(nana,"Vote",owner.getAddress(),2,2);
-        voteScore.invoke(alice,"Vote",owner.getAddress(),2,2);
-        voteScore.invoke(jax,"Vote",owner.getAddress(),2,2);
-        voteScore.invoke(jelly,"Vote",owner.getAddress(),1,2);
+        voteScore.invoke(nana,"Vote",owner.getAddress(),1,2);
+        voteScore.invoke(bob,"Vote",owner.getAddress(),1,2);
+        voteScore.invoke(bob,"Vote",owner.getAddress(),1,2);
+
+        voteScore.invoke(owner,"toJsonFormat_Pool",owner.getAddress());
+        // voteScore.invoke(bob,"createPool","thi hoa hau3","aaa","3a3a");
+        // voteScore.invoke(bob,"addCandidate",1,"nghuulang","deptrai","111a");
+        // voteScore.invoke(bob,"addCandidate",1,"nghuuanh","dxau","122b");
+
+        // voteScore.invoke(nana,"Vote",bob.getAddress(),2,1);
+        // voteScore.invoke(alice,"Vote",bob.getAddress(),2,1);
+        // voteScore.invoke(jax,"Vote",bob.getAddress(),2,1);
+        // voteScore.invoke(jelly,"Vote",bob.getAddress(),1,1);
+
+        // voteScore.invoke(nana,"Vote",owner.getAddress(),2,2);
+        // voteScore.invoke(alice,"Vote",owner.getAddress(),2,2);
+        // voteScore.invoke(jax,"Vote",owner.getAddress(),2,2);
+        // voteScore.invoke(jelly,"Vote",owner.getAddress(),1,2);
 
         // voteScore.invoke(alice,"Vote",alice.getAddress(),1);
         // voteScore.invoke(bob,"Vote",bob.getAddress(),1);

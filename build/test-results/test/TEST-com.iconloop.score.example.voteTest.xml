@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.iconloop.score.example.voteTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-11-05T12:22:17" hostname="DESKTOP-O7T6R5H" time="0.15">
+<testsuite name="com.iconloop.score.example.voteTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-11-06T13:22:50" hostname="DESKTOP-O7T6R5H" time="0.136">
   <properties/>
-  <testcase name="checkmanager()" classname="com.iconloop.score.example.voteTest" time="0.07"/>
-  <testcase name="checkCaller()" classname="com.iconloop.score.example.voteTest" time="0.075"/>
-  <testcase name="checkname()" classname="com.iconloop.score.example.voteTest" time="0.003"/>
-  <system-out><![CDATA[{"nghuulang":{"name":"nghuulang","votes":"0","qualification":"deptrai","imageurl":"111a"},"nghuuanh":{"name":"nghuuanh","votes":"1","qualification":"dxau","imageurl":"122b"}}
-{"nghuulang":{"name":"nghuulang","votes":"0","qualification":"deptrai","imageurl":"111a"},"nghuuanh":{"name":"nghuuanh","votes":"2","qualification":"dxau","imageurl":"122b"}}
-{"nghuulang":{"name":"nghuulang","votes":"0","qualification":"deptrai","imageurl":"111a"},"nghuuanh":{"name":"nghuuanh","votes":"3","qualification":"dxau","imageurl":"122b"}}
-{"nghuulang":{"name":"nghuulang","votes":"1","qualification":"deptrai","imageurl":"111a"},"nghuuanh":{"name":"nghuuanh","votes":"3","qualification":"dxau","imageurl":"122b"}}
-{"nghuuloi":{"name":"nghuuloi","votes":"0","qualification":"deptrai","imageurl":"111"},"nghuulam":{"name":"nghuulam","votes":"1","qualification":"deptraithualoi","imageurl":"122"}}
-{"nghuuloi":{"name":"nghuuloi","votes":"0","qualification":"deptrai","imageurl":"111"},"nghuulam":{"name":"nghuulam","votes":"2","qualification":"deptraithualoi","imageurl":"122"}}
-{"nghuuloi":{"name":"nghuuloi","votes":"0","qualification":"deptrai","imageurl":"111"},"nghuulam":{"name":"nghuulam","votes":"3","qualification":"deptraithualoi","imageurl":"122"}}
-{"nghuuloi":{"name":"nghuuloi","votes":"1","qualification":"deptrai","imageurl":"111"},"nghuulam":{"name":"nghuulam","votes":"3","qualification":"deptraithualoi","imageurl":"122"}}
+  <testcase name="checkmanager()" classname="com.iconloop.score.example.voteTest" time="0.047"/>
+  <testcase name="checkCaller()" classname="com.iconloop.score.example.voteTest" time="0.083"/>
+  <testcase name="checkname()" classname="com.iconloop.score.example.voteTest" time="0.002"/>
+  <system-out><![CDATA[{"thi hoa hau":{"nghuuloi1":{"name":"nghuuloi1","votes":"2","qualification":"deptrai1","imageurl":"111"},"nghuulam1":{"name":"nghuulam1","votes":"1","qualification":"deptraithualo1i","imageurl":"122"}},"thi hoa hau1":{"nghuuloi":{"name":"nghuuloi","votes":"3","qualification":"deptrai","imageurl":"111"},"nghuulam":{"name":"nghuulam","votes":"0","qualification":"deptraithualoi","imageurl":"122"}}}
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
