@@ -41,6 +41,7 @@ public class vote {
     private  DictDB<Address, User> Users  = Context.newDictDB("User", User.class);
     private BranchDB<Address, DictDB<Integer, Pool>> pools = Context.newBranchDB("poolTasks", Pool.class);
     private BranchDB<Address, BranchDB<Integer,  ArrayDB<Candidate>>> List_Candidate =Context.newBranchDB("Candidates", Candidate.class);
+    private DictDB<Address, String>  List_PoolDetail = Context.newDictDB("poolDetail", String.class);
     public vote(){
         this.name ="vote";
         this.manager=Context.getOwner();
@@ -97,6 +98,7 @@ public class vote {
         List_Candidate.at(owner).at(indexPool).add(newcandidate);
         pool.setcandidatesCount(pool.getCandidateCount()+1);
         pools.at(owner).set(indexPool,pool);
+        List_PoolDetail.set(owner,toJsonFormat(owner));
 
     }
 
@@ -116,49 +118,12 @@ public class vote {
 
     }
     
-    @External
+    @External(readonly = true)
     public String toJsonFormat_Pool(Address address){
-        String list_candidate ="";
-        list_candidate +="{" ;
-        User user = getUser(address);
-        Context.require(user.getPoolCount() >0,"No Pool exist !!!");
-        //Context.println("Count Pool  = " + String.valueOf(user.getPoolCount()));
-        for( int i =1;i <= user.getPoolCount();i++){
-            Pool pool = getPool(address, i);
-            list_candidate += "\""+pool.name()+"\":" +this.toJsonFormat_Candidate(address,i);
-            if (i==user.getPoolCount()){
-                break;
-            }
-            list_candidate +=",";
-
-        }
-        list_candidate +="}" ;
-        Context.println(list_candidate);
-        return list_candidate;
+        String result = List_PoolDetail.get(address);
+        return result;
     }
-    @External
-    public String toJsonFormat_Candidate(Address address,int indexPool){
-        String list_candidate ="";
-        list_candidate +="{" ;
-        Pool pool = getPool(address, indexPool);
-        int cand= pool.getCandidateCount();
-        //Context.println("Count Candidate  = " + String.valueOf(cand));
-        for( int j =0;j < cand;j++){
-            //Context.println( "truoc candidate ");
-            Candidate candidate = getCandidate(address, indexPool, j);
-            list_candidate += "\""+candidate.getName()+"\":" +candidate.toJsonFormat();
-            if (j==cand-1){
-                break;
-            }
-            list_candidate +=",";
-
-        }
-        list_candidate +="}" ;
-        //Context.println(list_candidate);
-        return list_candidate;
-    }
-
-
+    
     @External(readonly = true)
     public int getNumPoolByAddress(Address address){
         User user = getUser(address);
@@ -166,9 +131,10 @@ public class vote {
     }
 
     @External(readonly = true)
-    public void Login(Address address){
+    public String  Login(Address address){
         User user = getUser(address);
         Context.require(user != null,"No Registration !!!!!!!!!!!");
+        return "success";
         
     }
 
@@ -187,6 +153,45 @@ public class vote {
         Candidate candidate = List_Candidate.at(address).at(indexPool).get(indexCan);
         Context.require(candidate != null,"No Candidate exist !!!!!!!!!!!");
         return candidate;
+    }
+    private String toJsonFormat(Address address){
+        String list_candidate ="";
+        list_candidate +="{" ;
+        User user = getUser(address);
+        Context.require(user.getPoolCount() >0,"No Pool exist !!!");
+        //Context.println("Count Pool  = " + String.valueOf(user.getPoolCount()));
+        for( int i =1;i <= user.getPoolCount();i++){
+            Pool pool = getPool(address, i);
+            list_candidate += "\""+pool.name()+"\":" +toJsonFormat_Candidate(address,i);
+            if (i==user.getPoolCount()){
+                break;
+            }
+            list_candidate +=",";
+
+        }
+        list_candidate +="}" ;
+        Context.println(list_candidate);
+        return list_candidate;
+    }
+    private String toJsonFormat_Candidate(Address address,int indexPool){
+        String list_candidate ="";
+        list_candidate +="{" ;
+        Pool pool = getPool(address, indexPool);
+        int cand= pool.getCandidateCount();
+        //Context.println("Count Candidate  = " + String.valueOf(cand));
+        for( int j =0;j < cand;j++){
+            //Context.println( "truoc candidate ");
+            Candidate candidate = getCandidate(address, indexPool, j);
+            list_candidate += "\""+candidate.getName()+"\":" +candidate.toJsonFormat();
+            if (j==cand-1){
+                break;
+            }
+            list_candidate +=",";
+
+        }
+        list_candidate +="}" ;
+        //Context.println(list_candidate);
+        return list_candidate;
     }
 
     
